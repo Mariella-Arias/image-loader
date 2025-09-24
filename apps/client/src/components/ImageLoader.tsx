@@ -9,7 +9,11 @@ import {
   Autocomplete,
   TextField,
   Button,
+  Modal,
+  IconButton,
+  Typography,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 // Types
 import type { ImageGridProps } from '../types/image.types';
@@ -19,8 +23,12 @@ import type { ImageGridProps } from '../types/image.types';
  */
 const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
   const [file, setFile] = useState<File | null>(null);
+  const [targetFile, setTargetFile] = useState<string | null>(null);
 
-  // TODO: add a close button to delete image
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
+
   return (
     <Box
       sx={{
@@ -98,7 +106,7 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
                   name="avatar"
                   accept="image/*"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    // update image'
+                    // update file data
                     if (e.target.files) {
                       setFile(e.target.files[0]);
                     }
@@ -140,11 +148,69 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
                 height: '270px',
                 position: 'relative',
               }}
-              onClick={(e) => {
-                // TODO: add confirmation modal before deleting
-                onDelete(path);
-              }}
             >
+              <Modal
+                open={modalOpen}
+                onClose={handleClose}
+                aria-labelledby="modal-confirm-delete"
+                aria-describedby="modal-confirm-delete"
+              >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    borderRadius: '10px',
+                    boxShadow: 24,
+                    p: 4,
+                  }}
+                >
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Delete Image
+                  </Typography>
+                  <Typography
+                    id="modal-modal-description"
+                    sx={{ mt: 2 }}
+                  >
+                    This action is irreversible. Are you sure you want to delete
+                    this image?
+                  </Typography>
+                  <Box sx={{ mt: 2, display: 'flex', gap: '1rem' }}>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      sx={{ flex: 1 }}
+                      onClick={() => {
+                        // delete image
+                        if (targetFile) {
+                          onDelete(targetFile);
+                        }
+
+                        // hide modal
+                        handleClose();
+                      }}
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      sx={{ flex: 1 }}
+                      onClick={() => handleClose()}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Box>
+              </Modal>
+
               <Box
                 sx={{
                   height: '100%',
@@ -152,7 +218,19 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
                   position: 'absolute',
                   overflow: 'hidden',
                 }}
+                onClick={() => setTargetFile(path)}
               >
+                <IconButton
+                  onClick={handleOpen}
+                  sx={{
+                    position: 'absolute',
+                    zIndex: '30',
+                    right: 0,
+                    transform: 'translate(-0.25rem, 0.25rem)',
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
                 <img
                   src={`http://localhost:3000/${path}`}
                   alt="image-alt"
