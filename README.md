@@ -38,6 +38,7 @@ image-loader/
 │   │   ├── src/                     # UI source code
 │   │   │  ├── assets/               # Shared assets
 │   │   │  ├── components/           # Shared components
+│   │   │  │   ├── ImageGrid.tsx     # Image Grid component
 │   │   │  │   └── ImageLoader.tsx   # Image Loader component
 │   │   │  │
 │   │   │  ├── types/                # TypeScript type definitions
