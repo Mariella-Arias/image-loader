@@ -24,7 +24,7 @@ A Node.js application for file uploading.
 - **Styling**: Material UI v7
 - **HTTP Client**: Axios
 - **Language**: TypeScript
-- **Linting and formatting**: ESLint and Prettier
+- **Linting and Formatting**: ESLint and Prettier
 - **Package Manager**: npm
 - **Runtime**: Node.js
 
