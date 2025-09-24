@@ -93,3 +93,10 @@ image-loader/
 - **Backend**: 6hrs
 - **Frontend**: 7hrs
 - **Project Documentation**: 1hr
+
+## Future Improvements
+
+- Reliability: unit, integration and E2E testing
+- Performance: host images in CDN; load images with lazy loading
+- Scalability: improved state management to avoid drilling
+- UX: include image pagination
