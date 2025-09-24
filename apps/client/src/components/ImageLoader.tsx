@@ -16,7 +16,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 
 // Types
-import type { ImageGridProps } from '../types/image.types';
+import type { ImageGridProps, Image } from '../types/image.types';
 
 /**
  * Image Loader component
@@ -25,9 +25,19 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [targetFile, setTargetFile] = useState<string | null>(null);
 
+  // Modal
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => setModalOpen(false);
+
+  // Autocomplete
+  const [value, setValue] = useState<string | null>('');
+  const [inputValue, setInputValue] = useState('');
+
+  // Filter photos when a single image is selected from dropdown
+  const filteredList = value
+    ? photos.filter((photo) => photo.label === value)
+    : photos;
 
   return (
     <Box
@@ -57,9 +67,22 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
         <Autocomplete
           disablePortal
           options={photos}
+          value={value}
+          onChange={(event: any, newValue: Image) => {
+            if (newValue) {
+              setValue(newValue.label);
+            } else {
+              setValue(null);
+            }
+          }}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
           sx={{
-            minWidth: 300,
+            minWidth: '300px',
             padding: '1rem',
+            maxHeight: '3.5rem',
           }}
           renderInput={(params) => (
             <TextField
@@ -71,7 +94,7 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
         <Box
           sx={{
             padding: '1rem',
-            minWidth: 300,
+            minWidth: '300px',
           }}
         >
           <form
@@ -133,14 +156,14 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
           overflow: 'auto',
         }}
       >
-        {photos.length > 0 ? (
+        {filteredList.length > 0 ? (
           <Grid
             container
             spacing={3}
             direction="row"
             sx={{ padding: '1.5rem', overflow: 'auto' }}
           >
-            {photos.map(({ path, label }) => (
+            {filteredList.map(({ path, label }) => (
               <Grid
                 key={label}
                 sx={{
