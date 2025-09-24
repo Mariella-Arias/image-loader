@@ -12,6 +12,7 @@ import {
   Modal,
   IconButton,
   Typography,
+  FormLabel,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -122,7 +123,7 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
                   flexDirection: 'column',
                 }}
               >
-                <label htmlFor="avatar">Select an image: &nbsp;</label>
+                <FormLabel htmlFor="avatar">Select an image: &nbsp;</FormLabel>
                 <input
                   type="file"
                   id="avatar"
