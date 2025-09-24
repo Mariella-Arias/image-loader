@@ -6,8 +6,13 @@ export interface Image {
   id: number;
 }
 
-export interface ImageGridProps {
+export interface ImageLoaderProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
   onDelete: (target: string) => Promise<void>;
   photos: Image[];
+}
+
+export interface ImageGridProps {
+  filteredList: Image[];
+  onDelete: (target: string) => Promise<void>;
 }
