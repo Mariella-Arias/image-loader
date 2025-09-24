@@ -152,8 +152,8 @@ const ImageLoader = ({ onSubmit, onDelete, photos }: ImageGridProps) => {
               <Modal
                 open={modalOpen}
                 onClose={handleClose}
-                aria-labelledby="modal-confirm-delete"
-                aria-describedby="modal-confirm-delete"
+                aria-labelledby="modal-confirm-title"
+                aria-describedby="modal-confirm-confirmation"
               >
                 <Box
                   sx={{
