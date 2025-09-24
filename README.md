@@ -6,20 +6,21 @@ A Node.js application for file uploading.
 
 - **View Images**
 
-- A grid with all stored images
+  - A grid with all stored images
 
 - **Upload Images**
 
   - Browse device storage to select new image to upload
 
 - **Delete Images**
+
   - Delete a single image
   - Confirmation dialog to prevent accidental deletion
 
 ## Technology Stack
 
 - **Frontend Tooling**: Vite
-- **Backend Framkework**: Express.js 5.x
+- **Backend Framework**: Express.js 5.x
 - **Styling**: Material UI v7
 - **HTTP Client**: Axios
 - **Language**: TypeScript
@@ -41,7 +42,7 @@ image-loader/
 │   │   │  │
 │   │   │  ├── types/                # TypeScript type definitions
 │   │   │  ├── App.tsx               # Main app component
-│   │   │  ├── main.tsx              # Entry point
+│   │   │  ├── main.tsx              # Client entry point
 │   │   │  ├── styles.css            # Global styles
 │   │   │  └── vite-env.d.ts         # Vite environment types
 │   │   │
@@ -49,7 +50,7 @@ image-loader/
 │   │   ├── eslint.config.js   # ESLint configuration
 │   │   ├── index.html         # HTML entry point
 │   │   ├── package.json       # npm dependencies
-│   │   └── tsconfig.json        # TypeScript configuration
+│   │   └── tsconfig.json      # TypeScript configuration
 │   │
 │   └── server/
 │      ├── uploads/              # Target directory
